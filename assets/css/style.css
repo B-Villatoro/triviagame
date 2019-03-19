@@ -1,6 +1,10 @@
 body{
     background-image: url("../images/middleEarthMap.jpg");
     background-size: 100% ;
+    -webkit-user-select: none;
+    -moz-user-select: none;     
+    -ms-user-select: none;    
+    user-select: none;
 }  
 header{
     background-image: url("../images/towerOfSauron.jpg");
@@ -12,4 +16,23 @@ header{
 .row{
     margin-left: 0;
     margin-right: 0;
+}
+#holder{
+    background-image: url("../images/partchment.jpg");
+    height: 100%;
+}
+
+#startbox{
+    width: 98%;
+    height: 80%;
+}
+
+#q{
+    background-color: white;
+    margin-bottom: 5px;
+}
+
+#a{
+    background-Color: #d9c147;
+    margin : 5px 0px; 
 }
