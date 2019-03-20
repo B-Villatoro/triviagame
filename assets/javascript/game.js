@@ -63,7 +63,7 @@ clearBox = function(){
 sendInfo = function(){
     if(i < QUESTIONS.length){
     
-    $("#startbox").prepend("<div id='q'>"+QUESTIONS[i].q+"<div id='a'>"+QUESTIONS[i].a+"<div id='b'>"+QUESTIONS[i].b+"<div id='c'>"+QUESTIONS[i].c+"<div id='d'>"+QUESTIONS[i].d);
+    $("#startbox").prepend("<div id='q'>"+QUESTIONS[i].q+"</div><div id='a' class='pickthis'>"+QUESTIONS[i].a+"</div><div id='b' class='pickthis'>"+QUESTIONS[i].b+"</div><div id='c' class='pickthis'>"+QUESTIONS[i].c+"</div><div id='d'class='pickthis'>"+QUESTIONS[i].d+"</div>");
     selectAnswer();
     questionTimer.start();
     $('#startbox').append('<div id="timerbox" Timer : '+questionTimer.timer+'</div>');    
@@ -76,7 +76,7 @@ sendInfo = function(){
 }
 
 selectAnswer = function(){
-    $("#a").click(function(e){
+    $(".pickthis").click(function(e){
         answerChoice = e.target.id;
         console.log(answerChoice);
        convertAnswer(answerChoice);

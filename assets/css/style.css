@@ -22,19 +22,26 @@ header{
     height: 100%;
 }
 
+#start{
+    font-size: 150%;
+    border: 5px solid #d1b10f;
+    background-color: #d9c147;
+   
+    
+}
 #startbox{
     width: 98%;
     height: 400px;
 }
 
 #q{
-    background-color: white;
+    font-size: 160%;
     margin-bottom: 20px;
 }
 
-#a{
-    background-color: #d9c147;
-    margin : 5px 0px; 
+.pickthis{
+    font-size: 130%;
+    margin : 10px 0px; 
 }
 
 #nextbtn{
@@ -47,4 +54,8 @@ header{
 #finalscore{
     color: #d9c147;
     font-size: 200%;
+}
+
+#timerbox{
+    font-size: 120%
 }
