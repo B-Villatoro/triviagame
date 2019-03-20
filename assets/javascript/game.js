@@ -40,12 +40,21 @@ let i = 0;
 let answerChoice;
 let correct = 0;
 let wrong = 0;
+let gamerun = false;
+let answerPicked = false;
+let a;
+let b;
+let c; 
+let d;
+let timer = 30;
+let timernum;
 
 StartGame = function(){
     $("#start").click(function(){
+        gamerun = true
         clearBox();
         sendInfo();
-       
+        selectAnswer();   
     })
 }
 
@@ -53,29 +62,92 @@ clearBox = function(){
     $("#startbox").empty();
 }
 sendInfo = function(){
+    if(i < QUESTIONS.length){
+    $('#startbox').append('<div id="timerbox" Timer : '+timer+'</div>');    
     $("#startbox").append("<div id='q'>"+QUESTIONS[i].q+"<div id='a'>"+QUESTIONS[i].a+"<div id='b'>"+QUESTIONS[i].b+"<div id='c'>"+QUESTIONS[i].c+"<div id='d'>"+QUESTIONS[i].d);
+    selectAnswer();
+    }
+    else{
+        $("#startbox").html('<div id="finalscore">You got '+correct+" right!<br>You got "+wrong+' wrong</div>');
+    }
 }
 
 selectAnswer = function(){
     $("#a").click(function(e){
         answerChoice = e.target.id;
-       
+        console.log(answerChoice);
+       convertAnswer(answerChoice);
     })
 }
 
-compareAnswer = function(){
-    if (QUESTIONS.answerChoice == QUESTIONS.key){
+convertAnswer = function(vari){
+    if(vari === "a"){
+        a = String(vari);
+        compareAnswer(a);
+    }
+    else if(vari === "b"){
+        b = String(vari);
+        compareAnswer(b);
+    }
+    else if(vari === "c"){
+        c = String(vari);
+        compareAnswer(c);
+    }
+    else if(vari === "d"){
+        d = String(vari);
+        compareAnswer(d);
+    }
+}
+
+compareAnswer = function(answer){
+    
+    if (eval("QUESTIONS[i]."+answer) == QUESTIONS[i].key){
         correct++;
         $("#startbox").html("Nice Job!<br>"+QUESTIONS[i].comment)
-        console.log("you got it right!");
+        nextQuestion();
     }
     else{
         wrong++;
         $("#startbox").html("Nope <br>"+QUESTIONS[i].comment)
-
+        nextQuestion();
     }
 }
 
+
+nextQuestion = function(){
+    $("#startbox").append('<div id="nextbtn" class=" col-2 text-center shadow" > Next </div>');
+    $("#nextbtn").click(function(){
+        i++
+        clearBox();
+        sendInfo();
+        questionTimer();
+    })
+}
+
+
 StartGame();
-selectAnswer();
-compareAnswer();
+
+
+questionTimer = function(){
+    timer = 30;
+    timernum = setInterval(timerNum,1000)
+    
+    
+}
+timerNum = function(){
+    $('#timerbox').html("Timer : "+timer)
+    timer--;
+    if(timer == 0){
+        clearInterval(timernum);
+
+        i++;
+        sendInfo();
+        wrong++
+    }
+    
+}
+reprintTimerbox = function(){
+
+}
+
+questionTimer();

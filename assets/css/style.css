@@ -24,7 +24,7 @@ header{
 
 #startbox{
     width: 98%;
-    height: 80%;
+    height: 400px;
 }
 
 #q{
@@ -33,6 +33,18 @@ header{
 }
 
 #a{
-    background-Color: #d9c147;
+    background-color: #d9c147;
     margin : 5px 0px; 
+}
+
+#nextbtn{
+    background-color: #d9c147;
+    margin-left : auto;
+    margin-right: auto;
+    border: 5px solid #d1b10f;
+}
+
+#finalscore{
+    color: #d9c147;
+    font-size: 200%;
 }
