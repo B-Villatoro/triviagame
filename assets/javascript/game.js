@@ -46,15 +46,14 @@ let a;
 let b;
 let c; 
 let d;
-let timer = 30;
-let timernum;
+let timerInterval0;
+let timerInterval1;
 
 StartGame = function(){
     $("#start").click(function(){
         gamerun = true
         clearBox();
         sendInfo();
-        selectAnswer();   
     })
 }
 
@@ -63,12 +62,16 @@ clearBox = function(){
 }
 sendInfo = function(){
     if(i < QUESTIONS.length){
-    $('#startbox').append('<div id="timerbox" Timer : '+timer+'</div>');    
-    $("#startbox").append("<div id='q'>"+QUESTIONS[i].q+"<div id='a'>"+QUESTIONS[i].a+"<div id='b'>"+QUESTIONS[i].b+"<div id='c'>"+QUESTIONS[i].c+"<div id='d'>"+QUESTIONS[i].d);
+    
+    $("#startbox").prepend("<div id='q'>"+QUESTIONS[i].q+"<div id='a'>"+QUESTIONS[i].a+"<div id='b'>"+QUESTIONS[i].b+"<div id='c'>"+QUESTIONS[i].c+"<div id='d'>"+QUESTIONS[i].d);
     selectAnswer();
+    questionTimer.start();
+    $('#startbox').append('<div id="timerbox" Timer : '+questionTimer.timer+'</div>');    
+    
     }
     else{
         $("#startbox").html('<div id="finalscore">You got '+correct+" right!<br>You got "+wrong+' wrong</div>');
+       
     }
 }
 
@@ -102,8 +105,11 @@ convertAnswer = function(vari){
 compareAnswer = function(answer){
     
     if (eval("QUESTIONS[i]."+answer) == QUESTIONS[i].key){
+        
         correct++;
+        console.log(correct);
         $("#startbox").html("Nice Job!<br>"+QUESTIONS[i].comment)
+       
         nextQuestion();
     }
     else{
@@ -116,38 +122,66 @@ compareAnswer = function(answer){
 
 nextQuestion = function(){
     $("#startbox").append('<div id="nextbtn" class=" col-2 text-center shadow" > Next </div>');
+    questionTimer.stop();
+    questionTimer.reset();
     $("#nextbtn").click(function(){
         i++
         clearBox();
         sendInfo();
-        questionTimer();
     })
+}
+
+
+questionTimer = {
+
+    timer: 6,
+    isRunning : false,
+
+    start : function(){
+        if(!questionTimer.isRunning){
+            timerInterval0 = setInterval(questionTimer.ticking,1000);
+            timerInterval1 = setInterval(questionTimer.checker,1000);
+            questionTimer.isRunning = true;
+        }
+    },
+
+    stop : function(){
+        if(questionTimer.isRunning){
+            clearInterval(timerInterval1);
+            clearInterval(timerInterval0);
+            questionTimer.isRunning = false;
+        }
+    },
+
+    ticking : function(){
+        questionTimer.timer--;
+        console.log(questionTimer.timer);
+        $('#timerbox').html("Timer : "+questionTimer.timer)
+    },
+
+    outOfTime : function(){
+            i++
+            wrong++
+            clearBox()
+            sendInfo();  
+    },
+
+    reset : function(){
+        questionTimer.timer = 6;
+
+    },
+    checker : function(){
+        if(questionTimer.isRunning && questionTimer.timer === 0){
+            questionTimer.stop();
+            questionTimer.outOfTime();
+            questionTimer.reset();
+           
+        } 
+    },
 }
 
 
 StartGame();
 
 
-questionTimer = function(){
-    timer = 30;
-    timernum = setInterval(timerNum,1000)
-    
-    
-}
-timerNum = function(){
-    $('#timerbox').html("Timer : "+timer)
-    timer--;
-    if(timer == 0){
-        clearInterval(timernum);
 
-        i++;
-        sendInfo();
-        wrong++
-    }
-    
-}
-reprintTimerbox = function(){
-
-}
-
-questionTimer();
