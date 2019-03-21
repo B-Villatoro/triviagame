@@ -134,7 +134,7 @@ nextQuestion = function(){
 
 questionTimer = {
 
-    timer: 6,
+    timer: 11,
     isRunning : false,
 
     start : function(){
@@ -167,7 +167,7 @@ questionTimer = {
     },
 
     reset : function(){
-        questionTimer.timer = 6;
+        questionTimer.timer = 11;
 
     },
     checker : function(){
