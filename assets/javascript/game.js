@@ -34,7 +34,25 @@ const QUESTIONS =[
         d : "Gimli",
         key : "Gimli",
         comment : "Gimli and Legolas are best friends",     
-    }
+    },
+    {
+        q : "What is the last name of Frodo's mother?",
+        a : "Baggins",
+        b : "Took",
+        c : "Brandybuck",
+        d : "Gamgee",
+        key : "Brandybuck",
+        comment : "'Frodo's mother was Primula Brandybuck, and his father was Drogo Baggin",
+    },
+    {
+     q : "Melkor was the strongest of the Ainur. After the theft of the Simarils what was his name cursed to?",
+     a : "Valar",
+     b : "Morgoth",
+     c : "Ungoliant",
+     d : "Maeglin",  
+     key : "Morgoth",
+     comment : "Melkor cast down the Two Trees of valinor and stole Fëanor's Simarils. Fëanor then cursed Melkor with the name of Morgoth" 
+    },
 ]
 let i = 0;
 let answerChoice;
@@ -134,7 +152,7 @@ nextQuestion = function(){
 
 questionTimer = {
 
-    timer: 6,
+    timer: 9,
     isRunning : false,
 
     start : function(){
@@ -167,7 +185,7 @@ questionTimer = {
     },
 
     reset : function(){
-        questionTimer.timer = 6;
+        questionTimer.timer = 9;
 
     },
     checker : function(){
@@ -179,7 +197,6 @@ questionTimer = {
         } 
     },
 }
-
 
 StartGame();
 
